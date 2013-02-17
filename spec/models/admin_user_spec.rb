@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: admin_users
 #
 #  id                     :integer          not null, primary key
 #  email                  :string(255)      default(""), not null
@@ -15,19 +15,10 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  name                   :string(255)
 #
 
-class User < ActiveRecord::Base
-  rolify
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable, :registerable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable
+require 'spec_helper'
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
-  
+describe AdminUser do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

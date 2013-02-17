@@ -2,7 +2,11 @@
 <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
   <%= f.input :email, :autofocus => true %>
   <%= f.input :password %>
-  <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+    <div class="row-fluid" >
+      Remember Me: <input name='user[remember_me]' type="hidden" value='0'>
+      <input class="boolean optional" id="user_remember_me" name="user[remember_me" type="checkbox" value="0">
+    </div>
+    <br/><br/>
   <%= f.button :submit, "Sign in", :class => 'btn-primary' %>
 <% end %>
 <%= render "devise/shared/links" %>
