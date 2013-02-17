@@ -35,7 +35,7 @@ section {
 }
 
 .header-middle_title {
-	color: yellow !important;
+	color: #895419 !important;
     font-size: 20px;
 }
 
@@ -59,6 +59,11 @@ section {
 
 .margin-30 {
     margin-left: 70px;
+}
+
+.content {
+    padding-bottom: 35px;
+   background-color: #84a884;
 }
 
 #geneva_banner_text {
@@ -4937,14 +4942,6 @@ hr {
 .page-header {
   border-bottom: 2px solid #f5f3dc;
   padding-bottom: 5px;
-}
-
-.footer {
-position: relative;
-    margin-top: -35px; /* negative value of footer height */
-    height: 35px;
-    clear:both;
-    padding-top:20px;
 }
 
 .pull-right {
