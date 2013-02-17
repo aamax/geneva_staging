@@ -6,10 +6,11 @@ GenevaEquestrian::Application.routes.draw do
   match "/construction", :to => "home#construction"
   match "/home", :to => "home#home"
 
+
   root :to => "home#home"
 
   devise_for :users
   resources :users
 
-  match ':action' => 'static#:action'
+  match ':action' => 'pages#:action'
 end

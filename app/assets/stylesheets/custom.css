@@ -53,6 +53,14 @@ section {
     color: #1406a3;
 }
 
+.centered-section {
+    text-align: center;
+}
+
+.margin-30 {
+    margin-left: 70px;
+}
+
 #geneva_banner_text {
 	position:fixed;
 	top:80px;
@@ -4930,9 +4938,15 @@ hr {
   border-bottom: 2px solid #f5f3dc;
   padding-bottom: 5px;
 }
-footer.footer {
-  border-top: 2px solid #f5f3dc;
+
+.footer {
+position: relative;
+    margin-top: -35px; /* negative value of footer height */
+    height: 35px;
+    clear:both;
+    padding-top:20px;
 }
+
 .pull-right {
   float: right;
 }
