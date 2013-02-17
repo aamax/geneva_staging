@@ -6,10 +6,8 @@ GenevaEquestrian::Application.routes.draw do
   match "/construction", :to => "home#construction"
   match "/home", :to => "home#home"
 
-  authenticated :user do
-    root :to => 'home#home'
-  end
   root :to => "home#home"
+
   devise_for :users
   resources :users
 
