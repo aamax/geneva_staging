@@ -12,10 +12,14 @@ ActiveRecord::Base.connection.execute("truncate table users RESTART IDENTITY;")
 
 
 puts 'ROLES'
-YAML.load(ENV['ROLES']).each do |role|
-  Role.find_or_create_by_name({ :name => role }, :without_protection => true)
-  puts 'role: ' << role
-end
+#YAML.load(ENV['ROLES']).each do |role|
+#  Role.find_or_create_by_name({ :name => role }, :without_protection => true)
+#  puts 'role: ' << role
+#end
+Role.find_or_create_by_name({ :name => "admin" }, :without_protection => true)
+Role.find_or_create_by_name({ :name => "guest" }, :without_protection => true)
+puts "roles created..."
+
 puts 'DEFAULT USERS'
 user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 puts 'user: ' << user.name
@@ -23,7 +27,14 @@ user.add_role :admin
 
 ActiveRecord::Base.connection.execute("truncate table galleries RESTART IDENTITY;")
 
-puts 'Default gallery contents'
+puts 'x country gallery contents'
 pic = Gallery.create(fname: "flowerboxes.jpg", category: "x_country", thumbnail: "flowerboxes-thumb.jpg", caption: "Flower Boxes")
 pic = Gallery.create(fname: "xc1.jpg", category: "x_country", thumbnail: "xc1-thumb.jpg", caption: "Flower Fence")
 pic = Gallery.create(fname: "xc2.jpg", category: "x_country", thumbnail: "xc2-thumb.jpg", caption: "Fence 2")
+
+puts 'facility gallery contents'
+pic = Gallery.create(fname: "facility1.jpg", category: "facility", thumbnail: "facility1-thumb.jpg", caption: "caption1")
+pic = Gallery.create(fname: "facility2.jpg", category: "facility", thumbnail: "facility2-thumb.jpg", caption: "caption2")
+pic = Gallery.create(fname: "facility3.jpg", category: "facility", thumbnail: "facility3-thumb.jpg", caption: "caption3")
+pic = Gallery.create(fname: "facility4.jpg", category: "facility", thumbnail: "facility4-thumb.jpg", caption: "caption4")
+
