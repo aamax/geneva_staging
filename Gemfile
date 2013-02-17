@@ -16,6 +16,7 @@ gem "simple_form", ">= 2.0.4"
 gem "figaro", ">= 0.5.3"
 gem "pg"
 gem "activeadmin"
+gem 'bootstrap-addons-rails'
 
 group :development do
   gem "quiet_assets", ">= 1.0.1"

@@ -1,0 +1,52 @@
+<% content_for :head do %>
+    <link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">
+
+    <script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
+    <script src="js/bootstrap-image-gallery.min.js"></script>
+<% end %>
+<div class="row-fluid span10">
+  <strong>Welcome to Geneva Equestrian's new Cross Country Schooling course.</strong><br/>
+
+  Below are pictures of some of the cross country elements. Visit the website for further additions throughout the
+  summer.
+</div>
+<div class="row-fluid span 10">
+  <div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+
+      <h3 class="modal-title"></h3>
+    </div>
+    <div class="modal-body">
+      <div class="modal-image"></div>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000"><i class="icon-play icon-white"></i>
+        Slideshow</a>
+      <a class="btn btn-info modal-prev"><i class="icon-arrow-left icon-white"></i> Previous</a>
+      <a class="btn btn-primary modal-next">Next <i class="icon-arrow-right icon-white"></i></a>
+
+      <a class="btn modal-download" target="_blank"><i class="icon-download"></i> Download</a>
+    </div>
+  </div>
+</div>
+<div class="row-fluid span10">
+  <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="span.gallery-item">
+    <% (0...@pics.count).step(5) do |p| %>
+        <% pic = @pics[p] %>
+
+        <%= "<span class='gallery-item' data-href='/assets/#{pic.category}/#{pic.fname}' title='#{pic.caption}'>".html_safe %>
+        <%= "<image src='/assets/#{pic.category}/#{pic.fname}' class='gallery-thumbnail'></image>".html_safe %>
+        </span>
+
+        <% (1..4).each do |n| %>
+            <% unless @pics[p + n].nil? %>
+                <% pic = @pics[p + n] %>
+                <%= "<span class='gallery-item' data-href='/assets/#{pic.category}/#{pic.fname}' title='#{pic.caption}'>".html_safe %>
+                <%= "<image src='/assets/#{pic.category}/#{pic.fname}' class='gallery-thumbnail'></image>".html_safe %>
+                </span>
+            <% end %>
+        <% end %>
+    <% end %>
+  </div>
+</div>

@@ -66,6 +66,15 @@ section {
    background-color: #84a884;
 }
 
+.gallery-thumbnail {
+    height: 100px;
+}
+
+.modal-title {
+    color: black !important;
+    font-size: 28px;
+}
+
 #geneva_banner_text {
 	position:fixed;
 	top:80px;
@@ -474,6 +483,7 @@ h6 {
   font-weight: 700;
   color: inherit;
   text-rendering: optimizelegibility;
+  text-align: center;
 }
 h1 small,
 h2 small,
@@ -4331,7 +4341,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #ebd90b;
+  color: #4936ba;
 }
 h1 > small,
 h2 > small,

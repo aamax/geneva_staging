@@ -20,3 +20,10 @@ puts 'DEFAULT USERS'
 user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 puts 'user: ' << user.name
 user.add_role :admin
+
+ActiveRecord::Base.connection.execute("truncate table galleries RESTART IDENTITY;")
+
+puts 'Default gallery contents'
+pic = Gallery.create(fname: "flowerboxes.jpg", category: "x_country", thumbnail: "flowerboxes-thumb.jpg", caption: "Flower Boxes")
+pic = Gallery.create(fname: "xc1.jpg", category: "x_country", thumbnail: "xc1-thumb.jpg", caption: "Flower Fence")
+pic = Gallery.create(fname: "xc2.jpg", category: "x_country", thumbnail: "xc2-thumb.jpg", caption: "Fence 2")

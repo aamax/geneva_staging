@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+//= require bootstrap/load-image.min
+//= require bootstrap/image-gallery.min

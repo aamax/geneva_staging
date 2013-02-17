@@ -30,4 +30,10 @@ class PagesController < ApplicationController
   def contact
     render "/home/construction"
   end
+
+  def x_country
+    gallery = "x_country"
+    @pics = Gallery.x_country
+    render "x_country"
+  end
 end
