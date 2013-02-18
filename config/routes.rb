@@ -1,31 +1,6 @@
 GenevaEquestrian::Application.routes.draw do
-  get "galleries/index"
-
-  get "galleries/show"
-
-  get "galleries/edit"
-
-  get "galleries/update"
-
-  get "galleries/new"
-
-  get "galleries/create"
-
-  get "galleries/destroy"
-
-  get "events/index"
-
-  get "events/show"
-
-  get "events/edit"
-
-  get "events/update"
-
-  get "events/new"
-
-  get "events/create"
-
-  get "events/destroy"
+  resources :events
+  resources :galleries
 
   ActiveAdmin.routes(self)
 
