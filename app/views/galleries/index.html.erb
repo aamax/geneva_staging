@@ -1,2 +1,27 @@
-<h1>Galleries#index</h1>
-<p>Find me in app/views/galleries/index.html.erb</p>
+<h1>Listing galleries</h1>
+<%= link_to 'New Gallery', new_gallery_path %>
+
+<br />
+<table class="table table-striped">
+  <div class="row-fluid">
+  <tr>
+    <th class="span1">Category</th>
+    <th class="span1">File Name</th>
+    <th class="span1">ThumbNail</th>
+    <th class="span3">Caption</th>
+    <th colspan="3" class="span2 centered-section">Actions</th>
+  </tr>
+  </div>
+<% @galleries.each do |gallery| %>
+  <tr>
+    <td class="span1"><%= gallery.category %></td>
+    <td class="span1"><%= gallery.fname %></td>
+    <td class="span1"><%= gallery.thumbnail %></td>
+    <td class="span3"><%= gallery.caption %></td>
+    <td class="span1"><%= link_to 'Show', gallery %></td>
+    <td class="span1"><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
+    <td class="span1"><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+

@@ -14,5 +14,5 @@
 class Event < ActiveRecord::Base
   attr_accessible :category, :name, :date_and_time, :description
 
-  scope "clinics", where("category = 'clinic'")
+  scope "clinics", where("category = 'clinic'").order(:date_and_time)
 end

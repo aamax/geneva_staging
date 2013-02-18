@@ -75,6 +75,31 @@ section {
     font-size: 28px;
 }
 
+#event_date_and_time_1i {
+    width: 5em;
+}
+
+#event_date_and_time_2i {
+    width: 10em;
+}
+
+#event_date_and_time_3i {
+    width: 4em;
+}
+
+#event_date_and_time_4i {
+    width: 4em;
+}
+
+#event_date_and_time_5i {
+    width: 4em;
+}
+
+#event_description {
+    width: 40em;
+    height: 10em;
+}
+
 #geneva_banner_text {
 	position:fixed;
 	top:80px;

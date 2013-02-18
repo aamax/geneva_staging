@@ -1,2 +1,11 @@
-<h1>Galleries#show</h1>
-<p>Find me in app/views/galleries/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
+<%= link_to 'Back', galleries_path %>
+
+<br/><br/>
+
+<strong>Category: </strong> <%= @gallery.category %><br/><br/>
+<strong>File Name: </strong> <%= @gallery.fname %><br/><br/>
+<strong>Thumb Nail: </strong> <%= @gallery.thumbnail %><br/><br/>
+<strong>Caption: </strong> <%= @gallery.caption %><br/><br/>
