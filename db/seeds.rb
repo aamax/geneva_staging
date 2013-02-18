@@ -38,3 +38,13 @@ pic = Gallery.create(fname: "facility2.jpg", category: "facility", thumbnail: "f
 pic = Gallery.create(fname: "facility3.jpg", category: "facility", thumbnail: "facility3-thumb.jpg", caption: "caption3")
 pic = Gallery.create(fname: "facility4.jpg", category: "facility", thumbnail: "facility4-thumb.jpg", caption: "caption4")
 
+puts 'clinic documents'
+doc = Gallery.create(fname: "bh_entry_form.doc", category: "clinic_docs", thumbnail: "document.jpg", caption: "Brad Hall Entry Registration Form")
+doc = Gallery.create(fname: "hold_harmless.doc", category: "clinic_docs", thumbnail: "document.jpg", caption: "Hold Harmless Form")
+doc = Gallery.create(fname: "medical_auth.doc", category: "clinic_docs", thumbnail: "document.jpg", caption: "Medical Authorization Form")
+
+
+ActiveRecord::Base.connection.execute("truncate table events RESTART IDENTITY;")
+
+puts 'clinic events'
+event = Event.create(category: "clinic", name: "an event title", date_and_time: DateTime.now, description: "a description for the event...")

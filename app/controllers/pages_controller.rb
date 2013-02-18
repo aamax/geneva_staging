@@ -53,4 +53,9 @@ COMING SOON... NEW DRESSAGE ARENAS, OUTDOOR SHOW STABLING AND MORE!!!"
     @pics = Gallery.facility
     render "gallery_page"
   end
+
+  def clinics
+    @docs = Gallery.clinic_docs
+    @events = Event.clinics
+  end
 end
