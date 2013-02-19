@@ -55,7 +55,30 @@ COMING SOON... NEW DRESSAGE ARENAS, OUTDOOR SHOW STABLING AND MORE!!!"
   end
 
   def clinics
-    @docs = Gallery.clinic_docs
     @events = Event.clinics
+    @event_title = "Clinic"
+    render "events"
+  end
+
+  def schooling
+    @events = Event.schooling
+    @event_title = "Geneva Equestrian Schooling"
+    render "events"
+  end
+
+  def outside
+    @events = Event.outside
+    @event_title = "Outside"
+    render "events"
+  end
+
+  def calendar
+    @events = Event.order(:date_and_time)
+    @event_title = "All Scheduled Events"
+    render "events"
+  end
+
+  def downloads
+    @docs = Gallery.clinic_docs
   end
 end

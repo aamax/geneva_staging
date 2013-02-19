@@ -24,6 +24,8 @@ puts 'DEFAULT USERS'
 user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 puts 'user: ' << user.name
 user.add_role :admin
+user = User.find_or_create_by_email :name => "Cindy", :email => "genevaequestrian@msn.com", :password => "password", :password_confirmation => "password"
+user.add_role :admin
 
 ActiveRecord::Base.connection.execute("truncate table galleries RESTART IDENTITY;")
 
@@ -48,3 +50,4 @@ ActiveRecord::Base.connection.execute("truncate table events RESTART IDENTITY;")
 
 puts 'clinic events'
 event = Event.create(category: "clinic", name: "an event title", date_and_time: DateTime.now, description: "a description for the event...")
+

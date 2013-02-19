@@ -1,0 +1,13 @@
+
+<div class="row-fluid span5">
+  <h1>Forms to Download:</h1>
+  <br/><br/>
+  <ul>
+    <% @docs.each do |d| %>
+        <li class="doc_entry">
+          <a href="<%= "/docs/#{d.fname}" %>"><%= d.caption %></a>
+        </li><br/>
+    <% end %>
+  </ul>
+
+</div>
