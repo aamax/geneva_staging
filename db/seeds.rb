@@ -25,6 +25,7 @@ user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => EN
 puts 'user: ' << user.name
 user.add_role :admin
 user = User.find_or_create_by_email :name => "Cindy", :email => "genevaequestrian@msn.com", :password => "password", :password_confirmation => "password"
+puts 'user: ' << user.name
 user.add_role :admin
 
 ActiveRecord::Base.connection.execute("truncate table galleries RESTART IDENTITY;")
