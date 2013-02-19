@@ -1,0 +1,21 @@
+<%= simple_form_for(@contact) do |f| %>
+  <%= f.error_notification %>
+
+  Please fill out the fields below to be added to our mailing lists or ask questions.<br/>
+
+  <div class="form-inputs">
+    <table class="plain_table">
+      <tr>
+        <td><%= f.input :name %></td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td><%= f.input :email, :class=>"name_input" %></td>
+      </tr>
+    </table>
+    <%= f.input :subject, :class=>"subject_input" %>
+    <%= f.input :content, :class=>"contact_content", as: :text %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

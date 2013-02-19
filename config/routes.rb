@@ -1,4 +1,7 @@
 GenevaEquestrian::Application.routes.draw do
+  resources :contacts
+
+
   resources :events
   resources :galleries
 

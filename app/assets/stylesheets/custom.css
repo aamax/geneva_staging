@@ -121,6 +121,13 @@ section {
     height:13px;
     width:170px;
 	padding-bottom: 4px;
+    background-color: forestgreen;
+    color: yellow !important;
+    font-weight: normal !important;
+}
+.menu_button:hover {
+    color: white !important;
+    font-weight: bold;
 }
 
 #nav_menu {
@@ -140,6 +147,34 @@ section {
 
 #main_content {
 	padding-left: 20px;
+}
+
+.header_mail {
+    color: #82f5ff !important;
+}
+
+.header_mail:hover {
+    color: #76ff65 !important;
+}
+
+#contact_name {
+    width: 20em;
+}
+
+#contact_email {
+    width: 20em;
+}
+
+#contact_subject {
+    width: 45em;
+}
+
+#contact_content {
+    width: 40em;
+}
+
+.plain_table {
+    background-color: transparent;
 }
 
 #admin_msg {
