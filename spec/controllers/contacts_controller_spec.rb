@@ -19,12 +19,19 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ContactsController do
+  include Devise::TestHelpers
+
+  before :each do
+    @admin_user = User.create(:name => "admin user", :email => "admin@example.com",
+                              :password => "password", :password_confirmation => "password")
+    @admin_user.add_role :admin
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Contact. As you add validations to Contact, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "name" => "MyString" }
+    {"name" => "MyString"}
   end
 
   # This should return the minimal set of values that should be in the session
@@ -34,131 +41,278 @@ describe ContactsController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all contacts as @contacts" do
-      contact = Contact.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:contacts).should eq([contact])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested contact as @contact" do
-      contact = Contact.create! valid_attributes
-      get :show, {:id => contact.to_param}, valid_session
-      assigns(:contact).should eq(contact)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new contact as @contact" do
-      get :new, {}, valid_session
-      assigns(:contact).should be_a_new(Contact)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested contact as @contact" do
-      contact = Contact.create! valid_attributes
-      get :edit, {:id => contact.to_param}, valid_session
-      assigns(:contact).should eq(contact)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Contact" do
-        expect {
-          post :create, {:contact => valid_attributes}, valid_session
-        }.to change(Contact, :count).by(1)
-      end
-
-      it "assigns a newly created contact as @contact" do
-        post :create, {:contact => valid_attributes}, valid_session
-        assigns(:contact).should be_a(Contact)
-        assigns(:contact).should be_persisted
-      end
-
-      it "redirects to the created contact" do
-        post :create, {:contact => valid_attributes}, valid_session
-        response.should redirect_to(Contact.last)
-      end
+  context "as admin user" do
+    before :each do
+      #sign_in @admin_user
+      @request.env["devise.mapping"] = Devise.mappings[:admin]
+      sign_in @admin_user
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved contact as @contact" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Contact.any_instance.stub(:save).and_return(false)
-        post :create, {:contact => { "name" => "invalid value" }}, valid_session
-        assigns(:contact).should be_a_new(Contact)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Contact.any_instance.stub(:save).and_return(false)
-        post :create, {:contact => { "name" => "invalid value" }}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested contact" do
+    describe "GET index" do
+      it "assigns all contacts as @contacts" do
         contact = Contact.create! valid_attributes
-        # Assuming there are no other contacts in the database, this
-        # specifies that the Contact created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Contact.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => contact.to_param, :contact => { "name" => "MyString" }}, valid_session
+        get :index, {}
+        assigns(:contacts).should eq([contact])
       end
+    end
 
+    describe "GET show" do
       it "assigns the requested contact as @contact" do
         contact = Contact.create! valid_attributes
-        put :update, {:id => contact.to_param, :contact => valid_attributes}, valid_session
+        get :show, {:id => contact.to_param}
         assigns(:contact).should eq(contact)
       end
+    end
 
-      it "redirects to the contact" do
-        contact = Contact.create! valid_attributes
-        put :update, {:id => contact.to_param, :contact => valid_attributes}, valid_session
-        response.should redirect_to(contact)
+    describe "GET new" do
+      it "assigns a new contact as @contact" do
+        get :new, {}
+        assigns(:contact).should be_a_new(Contact)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the contact as @contact" do
+    describe "GET edit" do
+      it "assigns the requested contact as @contact" do
         contact = Contact.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Contact.any_instance.stub(:save).and_return(false)
-        put :update, {:id => contact.to_param, :contact => { "name" => "invalid value" }}, valid_session
+        get :edit, {:id => contact.to_param}
         assigns(:contact).should eq(contact)
       end
+    end
 
-      it "re-renders the 'edit' template" do
-        contact = Contact.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Contact.any_instance.stub(:save).and_return(false)
-        put :update, {:id => contact.to_param, :contact => { "name" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+    describe "POST create" do
+      describe "with valid params" do
+        it "creates a new Contact" do
+          expect {
+            post :create, {:contact => valid_attributes}
+          }.to change(Contact, :count).by(1)
+        end
+
+        it "assigns a newly created contact as @contact" do
+          post :create, {:contact => valid_attributes}
+          assigns(:contact).should be_a(Contact)
+          assigns(:contact).should be_persisted
+        end
+
+        it "redirects to the created contact" do
+          post :create, {:contact => valid_attributes}
+          response.should redirect_to(Contact.last)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved contact as @contact" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Contact.any_instance.stub(:save).and_return(false)
+          post :create, {:contact => {"name" => "invalid value"}}
+          assigns(:contact).should be_a_new(Contact)
+        end
+
+        it "re-renders the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Contact.any_instance.stub(:save).and_return(false)
+          post :create, {:contact => {"name" => "invalid value"}}
+          response.should render_template("new")
+        end
       end
     end
-  end
 
-  describe "DELETE destroy" do
-    it "destroys the requested contact" do
-      contact = Contact.create! valid_attributes
-      expect {
-        delete :destroy, {:id => contact.to_param}, valid_session
-      }.to change(Contact, :count).by(-1)
+    describe "PUT update" do
+      describe "with valid params" do
+        it "updates the requested contact" do
+          contact = Contact.create! valid_attributes
+          # Assuming there are no other contacts in the database, this
+          # specifies that the Contact created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          Contact.any_instance.should_receive(:update_attributes).with({"name" => "MyString"})
+          put :update, {:id => contact.to_param, :contact => {"name" => "MyString"}}
+        end
+
+        it "assigns the requested contact as @contact" do
+          contact = Contact.create! valid_attributes
+          put :update, {:id => contact.to_param, :contact => valid_attributes}
+          assigns(:contact).should eq(contact)
+        end
+
+        it "redirects to the contact" do
+          i = Contact.all.length
+          contact = Contact.create! valid_attributes
+          put :update, {:id => contact.to_param, :contact => valid_attributes}
+          response.should redirect_to(root_path)
+          Contact.all.length.should == i + 1
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the contact as @contact" do
+          contact = Contact.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          Contact.any_instance.stub(:save).and_return(false)
+          put :update, {:id => contact.to_param, :contact => {"name" => "invalid value"}}
+          assigns(:contact).should eq(contact)
+        end
+
+        it "re-renders the 'edit' template" do
+          contact = Contact.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          Contact.any_instance.stub(:save).and_return(false)
+          put :update, {:id => contact.to_param, :contact => {"name" => "invalid value"}}
+
+          response.should redirect_to(edit_contact_path)
+        end
+      end
     end
 
-    it "redirects to the contacts list" do
-      contact = Contact.create! valid_attributes
-      delete :destroy, {:id => contact.to_param}, valid_session
-      response.should redirect_to(contacts_url)
+    describe "DELETE destroy" do
+      it "destroys the requested contact" do
+        contact = FactoryGirl.create(:contact)
+
+
+
+        expect {
+          delete :destroy, {:id => contact.to_param}
+        }.to change(Contact, :count).by(-1)
+      end
+
+      it "redirects to the contacts list" do
+        contact = Contact.create! valid_attributes
+        delete :destroy, {:id => contact.to_param}
+        response.should redirect_to(contacts_url)
+      end
     end
+
   end
+
+  #context "as non logged in user" do
+  #  describe "GET index" do
+  #    it "assigns all contacts as @contacts" do
+  #      contact = Contact.create! valid_attributes
+  #      get :index, {}
+  #      assigns(:contacts).should eq([contact])
+  #    end
+  #  end
+  #
+  #  describe "GET show" do
+  #    it "assigns the requested contact as @contact" do
+  #      contact = Contact.create! valid_attributes
+  #      get :show, {:id => contact.to_param}
+  #      assigns(:contact).should eq(contact)
+  #    end
+  #  end
+  #
+  #  describe "GET new" do
+  #    it "assigns a new contact as @contact" do
+  #      get :new, {}
+  #      assigns(:contact).should be_a_new(Contact)
+  #    end
+  #  end
+  #
+  #  describe "GET edit" do
+  #    it "assigns the requested contact as @contact" do
+  #      contact = Contact.create! valid_attributes
+  #      get :edit, {:id => contact.to_param}
+  #      assigns(:contact).should eq(contact)
+  #    end
+  #  end
+  #
+  #  describe "POST create" do
+  #    describe "with valid params" do
+  #      it "creates a new Contact" do
+  #        expect {
+  #          post :create, {:contact => valid_attributes}
+  #        }.to change(Contact, :count).by(1)
+  #      end
+  #
+  #      it "assigns a newly created contact as @contact" do
+  #        post :create, {:contact => valid_attributes}
+  #        assigns(:contact).should be_a(Contact)
+  #        assigns(:contact).should be_persisted
+  #      end
+  #
+  #      it "redirects to the created contact" do
+  #        post :create, {:contact => valid_attributes}
+  #        response.should redirect_to(Contact.last)
+  #      end
+  #    end
+  #
+  #    describe "with invalid params" do
+  #      it "assigns a newly created but unsaved contact as @contact" do
+  #        # Trigger the behavior that occurs when invalid params are submitted
+  #        Contact.any_instance.stub(:save).and_return(false)
+  #        post :create, {:contact => {"name" => "invalid value"}}
+  #        assigns(:contact).should be_a_new(Contact)
+  #      end
+  #
+  #      it "re-renders the 'new' template" do
+  #        # Trigger the behavior that occurs when invalid params are submitted
+  #        Contact.any_instance.stub(:save).and_return(false)
+  #        post :create, {:contact => {"name" => "invalid value"}}
+  #        response.should render_template("new")
+  #      end
+  #    end
+  #  end
+  #
+  #  describe "PUT update" do
+  #    describe "with valid params" do
+  #      it "updates the requested contact" do
+  #        contact = Contact.create! valid_attributes
+  #        # Assuming there are no other contacts in the database, this
+  #        # specifies that the Contact created on the previous line
+  #        # receives the :update_attributes message with whatever params are
+  #        # submitted in the request.
+  #        Contact.any_instance.should_receive(:update_attributes).with({"name" => "MyString"})
+  #        put :update, {:id => contact.to_param, :contact => {"name" => "MyString"}}
+  #      end
+  #
+  #      it "assigns the requested contact as @contact" do
+  #        contact = Contact.create! valid_attributes
+  #        put :update, {:id => contact.to_param, :contact => valid_attributes}
+  #        assigns(:contact).should eq(contact)
+  #      end
+  #
+  #      it "redirects to the contact" do
+  #        contact = Contact.create! valid_attributes
+  #        put :update, {:id => contact.to_param, :contact => valid_attributes}
+  #        response.should redirect_to(contact)
+  #      end
+  #    end
+  #
+  #    describe "with invalid params" do
+  #      it "assigns the contact as @contact" do
+  #        contact = Contact.create! valid_attributes
+  #        # Trigger the behavior that occurs when invalid params are submitted
+  #        Contact.any_instance.stub(:save).and_return(false)
+  #        put :update, {:id => contact.to_param, :contact => {"name" => "invalid value"}}
+  #        assigns(:contact).should eq(contact)
+  #      end
+  #
+  #      it "re-renders the 'edit' template" do
+  #        contact = Contact.create! valid_attributes
+  #        # Trigger the behavior that occurs when invalid params are submitted
+  #        Contact.any_instance.stub(:save).and_return(false)
+  #        put :update, {:id => contact.to_param, :contact => {"name" => "invalid value"}}
+  #        response.should render_template("edit")
+  #      end
+  #    end
+  #  end
+  #
+  #  describe "DELETE destroy" do
+  #    it "destroys the requested contact" do
+  #      contact = Contact.create! valid_attributes
+  #      expect {
+  #        delete :destroy, {:id => contact.to_param}
+  #      }.to change(Contact, :count).by(-1)
+  #    end
+  #
+  #    it "redirects to the contacts list" do
+  #      contact = Contact.create! valid_attributes
+  #      delete :destroy, {:id => contact.to_param}
+  #      response.should redirect_to(contacts_url)
+  #    end
+  #  end
+  #
+  #end
 
 end
+
+

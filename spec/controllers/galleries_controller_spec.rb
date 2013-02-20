@@ -23,8 +23,13 @@ describe GalleriesController do
   # This should return the minimal set of attributes required to create a valid
   # Gallery. As you add validations to Gallery, be sure to
   # update the return value of this method accordingly.
+  #  fname      :string(255)
+  #  category   :string(255)
+  #  thumbnail  :string(255)
+  #  caption    :string(255)
+
   def valid_attributes
-    {  }
+    {fname: "fname", category: "category", thumbnail: "fname", caption: "caption"}
   end
 
   # This should return the minimal set of values that should be in the session
@@ -34,131 +39,133 @@ describe GalleriesController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all galleries as @galleries" do
-      gallery = Gallery.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:galleries).should eq([gallery])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested gallery as @gallery" do
-      gallery = Gallery.create! valid_attributes
-      get :show, {:id => gallery.to_param}, valid_session
-      assigns(:gallery).should eq(gallery)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new gallery as @gallery" do
-      get :new, {}, valid_session
-      assigns(:gallery).should be_a_new(Gallery)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested gallery as @gallery" do
-      gallery = Gallery.create! valid_attributes
-      get :edit, {:id => gallery.to_param}, valid_session
-      assigns(:gallery).should eq(gallery)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Gallery" do
-        expect {
-          post :create, {:gallery => valid_attributes}, valid_session
-        }.to change(Gallery, :count).by(1)
-      end
-
-      it "assigns a newly created gallery as @gallery" do
-        post :create, {:gallery => valid_attributes}, valid_session
-        assigns(:gallery).should be_a(Gallery)
-        assigns(:gallery).should be_persisted
-      end
-
-      it "redirects to the created gallery" do
-        post :create, {:gallery => valid_attributes}, valid_session
-        response.should redirect_to(Gallery.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved gallery as @gallery" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Gallery.any_instance.stub(:save).and_return(false)
-        post :create, {:gallery => {  }}, valid_session
-        assigns(:gallery).should be_a_new(Gallery)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Gallery.any_instance.stub(:save).and_return(false)
-        post :create, {:gallery => {  }}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested gallery" do
+  context "not logged in" do
+    describe "GET index" do
+      it "assigns all galleries as @galleries" do
         gallery = Gallery.create! valid_attributes
-        # Assuming there are no other galleries in the database, this
-        # specifies that the Gallery created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Gallery.any_instance.should_receive(:update_attributes).with({ "these" => "params" })
-        put :update, {:id => gallery.to_param, :gallery => { "these" => "params" }}, valid_session
+        get :index, {}
+        assigns(:galleries).should eq([])
       end
+    end
 
+    describe "GET show" do
       it "assigns the requested gallery as @gallery" do
         gallery = Gallery.create! valid_attributes
-        put :update, {:id => gallery.to_param, :gallery => valid_attributes}, valid_session
+        get :show, {:id => gallery.to_param}
         assigns(:gallery).should eq(gallery)
-      end
-
-      it "redirects to the gallery" do
-        gallery = Gallery.create! valid_attributes
-        put :update, {:id => gallery.to_param, :gallery => valid_attributes}, valid_session
-        response.should redirect_to(gallery)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the gallery as @gallery" do
+    describe "GET new" do
+      it "assigns a new gallery as @gallery" do
+        get :new, {}
+        assigns(:gallery).should be_a_new(Gallery)
+      end
+    end
+
+    describe "GET edit" do
+      it "assigns the requested gallery as @gallery" do
         gallery = Gallery.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Gallery.any_instance.stub(:save).and_return(false)
-        put :update, {:id => gallery.to_param, :gallery => {  }}, valid_session
+        get :edit, {:id => gallery.to_param}
         assigns(:gallery).should eq(gallery)
       end
+    end
 
-      it "re-renders the 'edit' template" do
+    describe "POST create" do
+      describe "with valid params" do
+        it "creates a new Gallery" do
+          expect {
+            post :create, {:gallery => valid_attributes}
+          }.to change(Gallery, :count).by(0)
+        end
+
+        it "assigns a newly created gallery as @gallery" do
+          post :create, {:gallery => valid_attributes}
+          assigns(:gallery).should be_a(Gallery)
+          assigns(:gallery).should_not be_persisted
+        end
+
+        it "redirects to the created gallery" do
+          post :create, {:gallery => valid_attributes}
+          response.should redirect_to(root_path)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved gallery as @gallery" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Gallery.any_instance.stub(:save).and_return(false)
+          post :create, {:gallery => {}}
+          assigns(:gallery).should be_a_new(Gallery)
+        end
+
+        it "re-renders the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Gallery.any_instance.stub(:save).and_return(false)
+          post :create, {:gallery => {}}
+
+          response.should redirect_to(root_path)
+        end
+      end
+    end
+
+    describe "PUT update" do
+      describe "with valid params" do
+        #it "updates the requested gallery" do
+        #  gallery = Gallery.create! valid_attributes
+        #  # Assuming there are no other galleries in the database, this
+        #  # specifies that the Gallery created on the previous line
+        #  # receives the :update_attributes message with whatever params are
+        #  # submitted in the request.
+        #  Gallery.any_instance.should_receive(:update_attributes).with({"these" => "params"})
+        #  put :update, {:id => gallery.to_param, :gallery => {"these" => "params"}}
+        #end
+
+        it "assigns the requested gallery as @gallery" do
+          gallery = Gallery.create! valid_attributes
+          put :update, {:id => gallery.to_param, :gallery => valid_attributes}
+          assigns(:gallery).should eq(gallery)
+        end
+
+        it "redirects to the gallery" do
+          gallery = Gallery.create! valid_attributes
+          put :update, {:id => gallery.to_param, :gallery => valid_attributes}
+          response.should redirect_to(root_path)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the gallery as @gallery" do
+          gallery = Gallery.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          Gallery.any_instance.stub(:save).and_return(false)
+          put :update, {:id => gallery.to_param, :gallery => {}}
+          assigns(:gallery).should eq(gallery)
+        end
+
+        it "re-renders the 'edit' template" do
+          gallery = Gallery.create! valid_attributes
+          # Trigger the behavior that occurs when invalid params are submitted
+          Gallery.any_instance.stub(:save).and_return(false)
+          put :update, {:id => gallery.to_param, :gallery => {}}
+          response.should redirect_to(root_path)
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      it "destroys the requested gallery" do
         gallery = Gallery.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Gallery.any_instance.stub(:save).and_return(false)
-        put :update, {:id => gallery.to_param, :gallery => {  }}, valid_session
-        response.should render_template("edit")
+        expect {
+          delete :destroy, {:id => gallery.to_param}
+        }.to change(Gallery, :count).by(0)
+      end
+
+      it "redirects to the galleries list" do
+        gallery = Gallery.create! valid_attributes
+        delete :destroy, {:id => gallery.to_param}
+        response.should redirect_to(root_path)
       end
     end
   end
-
-  describe "DELETE destroy" do
-    it "destroys the requested gallery" do
-      gallery = Gallery.create! valid_attributes
-      expect {
-        delete :destroy, {:id => gallery.to_param}, valid_session
-      }.to change(Gallery, :count).by(-1)
-    end
-
-    it "redirects to the galleries list" do
-      gallery = Gallery.create! valid_attributes
-      delete :destroy, {:id => gallery.to_param}, valid_session
-      response.should redirect_to(galleries_url)
-    end
-  end
-
 end
