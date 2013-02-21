@@ -4,11 +4,20 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.clinics
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @events }
+    @event_type = params[:event_type]
+    if @event_type == 'outside'
+      @events = Event.outside.order(:date_and_time)
+      @event_title = "Outside"
+    elsif @event_type == 'clinic'
+      @events = Event.clinics.order(:date_and_time)
+      @event_title = "Clinic"
+    elsif @event_type == 'schooling'
+      @events = Event.schooling.order(:date_and_time)
+      @event_title = "Geneva Equestrian Schooling"
+    else # get all events
+      @events = Event.order(:date_and_time)
+      @event_title = "All Scheduled Events"
+      @event_type = "clinic"
     end
   end
 
@@ -16,27 +25,20 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @event }
-    end
   end
 
   # GET /events/new
   # GET /events/new.json
   def new
     @event = Event.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @event }
-    end
+    @event.category = params[:id] unless params[:id] == 'calendar'
+    @event.category ||= "clinic"
   end
 
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+    @event.category = params[:event_type]
   end
 
   # POST /events
@@ -44,14 +46,10 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render json: @event, status: :created, location: @event }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.save
+      redirect_to "#{events_path}?id=#{params[:event][:category]}", notice: 'Event was successfully created.'
+    else
+      render action: "new?id=clinic", :alert=>"Error creating event..."
     end
   end
 

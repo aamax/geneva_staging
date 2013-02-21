@@ -1,14 +1,25 @@
-<%= simple_form_for(@gallery) do |f| %>
-  <%= f.error_notification %>
+<div class="row-fluid">
+  <div class="span4">
+    <%= simple_form_for(@gallery) do |f| %>
+        <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :category %>
-    <%= f.input :fname %>
-    <%= f.input :thumbnail %>
-    <%= f.input :caption %>
-  </div>
+        <div class="form-inputs">
+          <%= f.select :category, options_for_select(["facility", "x_country"], @gallery.category ) %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+          <%= f.input :caption %>
+          <%= f.file_field :image %>
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit %>
+        </div>
+    <% end %>
   </div>
-<% end %>
+  <div class="span6">
+
+    <% unless @gallery.image.blank? %>
+        <%= image_tag @gallery.image.url(:full) %>
+    <% end %>
+
+  </div>
+</div>
+

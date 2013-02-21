@@ -1,15 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Edit', "#{edit_event_path(@event)}?event_type=#{@event.category}" %> |
 <%= link_to 'Back', events_path %>
 
 <br/><br/>
 
-<strong>Category: </strong> <%= @event.category %><br/><br/>
-<strong>Name: </strong> <%= @event.name %><br/><br/>
-<strong>Date & Time: </strong> <%= @event.date_and_time %><br/><br/>
-<strong>Description: </strong> <%= @event.description %><br/><br/>
+<strong>Category: </strong>     <%= @event.category %><br/><br/>
+<strong>Name: </strong>         <%= @event.name %><br/><br/>
+<strong>Date & Time: </strong>  <%= @event.date_and_time.strftime("%Y-%m-%d %H:%M") %><br/><br/>
+<strong>Description: </strong>  <%= @event.description.html_safe %><br/><br/>
 
 
 

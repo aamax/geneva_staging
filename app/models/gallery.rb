@@ -12,7 +12,9 @@
 #
 
 class Gallery < ActiveRecord::Base
-  attr_accessible :fname, :category, :thumbnail, :caption
+  attr_accessible :fname, :category, :thumbnail, :caption, :image
+
+  has_attached_file :image, :styles => { :full => "800x800>", :thumb => "100x100>" }
 
   scope "x_country", where("category = 'x_country'")
   scope "facility", where("category = 'facility'")

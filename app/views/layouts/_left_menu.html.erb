@@ -1,6 +1,13 @@
 <div id="nav_menu">
   <p><a data-toggle="modal" href="/" class="btn  btn-primary btn-large menu_button">Home</a></p>
 
+
+  <% if user_signed_in? %>
+      <% if current_user.has_role? :admin %>
+          <p><a data-toggle="modal" href="/admin" class="btn  btn-primary btn-large menu_button">Admin</a></p>
+      <% end %>
+  <% end %>
+
   <p><a data-toggle="modal" href="/about" class="btn  btn-primary btn-large menu_button">About Us</a></p>
 
   <p><a data-toggle="modal" href="/boarding" class="btn btn-primary btn-large menu_button">Boarding</a></p>
@@ -11,14 +18,21 @@
 
   <p><a data-toggle="modal" href="/x_country" class="btn btn-primary btn-large menu_button">Cross Country</a></p>
 
-  <p><a data-toggle="modal" href="/calendar" class="btn btn-primary btn-large menu_button">Calendar</a></p>
+  <p><%= link_to "Calendar", "#{events_path}?event_type=calendar", id: "calendar",
+              :class=>"btn btn-primary btn-large menu_button",
+              :data => {:toggle=>"modal"} %></p>
 
-  <p><a data-toggle="modal" href="/clinics" class="btn btn-primary btn-large menu_button">Clinics</a></p>
+  <p><%= link_to "Clinics", "#{events_path}?event_type=clinic", id: "calendar",
+                 :class=>"btn btn-primary btn-large menu_button",
+                 :data => {:toggle=>"modal"} %></p>
 
-  <p><a data-toggle="modal" href="/schooling" class="btn btn-primary btn-large menu_button">GE Schooling Shows</a>
-  </p>
+  <p><%= link_to "GE Schooling Shows", "#{events_path}?event_type=schooling", id: "calendar",
+                 :class=>"btn btn-primary btn-large menu_button",
+                 :data => {:toggle=>"modal"} %></p>
 
-  <p><a data-toggle="modal" href="/outside" class="btn btn-primary btn-large menu_button">Outside Events</a></p>
+  <p><%= link_to "Outside Events", "#{events_path}?event_type=outside", id: "calendar",
+                 :class=>"btn btn-primary btn-large menu_button",
+                 :data => {:toggle=>"modal"} %></p>
 
   <p><a data-toggle="modal" href="/construction" class="btn btn-primary btn-large menu_button">Sales</a></p>
 
@@ -29,4 +43,3 @@
   <p><a data-toggle="modal" href="/downloads" class="btn btn-primary btn-large menu_button">Downloads</a></p>
 
 </div>
-<br/><br/>

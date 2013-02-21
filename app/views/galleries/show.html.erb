@@ -9,3 +9,4 @@
 <strong>File Name: </strong> <%= @gallery.fname %><br/><br/>
 <strong>Thumb Nail: </strong> <%= @gallery.thumbnail %><br/><br/>
 <strong>Caption: </strong> <%= @gallery.caption %><br/><br/>
+<%= image_tag @gallery.image.url(:full) %>

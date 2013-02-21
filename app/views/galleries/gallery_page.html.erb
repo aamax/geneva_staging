@@ -5,7 +5,11 @@
     <script src="js/bootstrap-image-gallery.min.js"></script>
 <% end %>
 <div class="row-fluid span10">
-  <%= @page_header.html_safe %>
+  <%= @page_header.html_safe %>  <br/><br/>
+
+  <% if (!current_user.nil? && current_user.has_role?(:admin)) %>
+    <%= link_to "Upload New Image", new_gallery_path, :class=>"btn btn-info" %>
+  <% end %>
 
 </div>
 <div class="row-fluid span 10">
@@ -28,21 +32,26 @@
     </div>
   </div>
 </div>
-<div class="row-fluid span10">
+<div class="row-fluid">
   <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="span.gallery-item">
     <% (0...@pics.count).step(5) do |p| %>
         <% pic = @pics[p] %>
-
-        <%= "<span class='gallery-item' data-href='/assets/#{pic.category}/#{pic.fname}' title='#{pic.caption}'>".html_safe %>
-        <%= "<image src='/assets/#{pic.category}/#{pic.fname}' class='gallery-thumbnail'></image>".html_safe %>
+        <div class="span2">
+        <%= "<span class='gallery-item' data-href='#{pic.image.url(:full)}' title='#{pic.caption}'>".html_safe %>
+        <%= "<image src='#{pic.image.url(:full)}' class='gallery-thumbnail'></image>".html_safe %><br/>
         </span>
+          <%= link_to "Edit", edit_gallery_path(pic) %>
+        </div>
 
         <% (1..4).each do |n| %>
             <% unless @pics[p + n].nil? %>
                 <% pic = @pics[p + n] %>
-                <%= "<span class='gallery-item' data-href='/assets/#{pic.category}/#{pic.fname}' title='#{pic.caption}'>".html_safe %>
-                <%= "<image src='/assets/#{pic.category}/#{pic.fname}' class='gallery-thumbnail'></image>".html_safe %>
+                <div class="span2">
+                <%= "<span class='gallery-item' data-href='#{pic.image.url(:full)}' title='#{pic.caption}'>".html_safe %>
+                <%= "<image src='#{pic.image.url(:full)}' class='gallery-thumbnail'></image>".html_safe %><br/>
                 </span>
+                  <%= link_to "Edit", edit_gallery_path(pic) %>
+                </div>
             <% end %>
         <% end %>
     <% end %>

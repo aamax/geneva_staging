@@ -30,17 +30,17 @@ user.add_role :admin
 
 ActiveRecord::Base.connection.execute("truncate table galleries RESTART IDENTITY;")
 
-puts 'x country gallery contents'
-pic = Gallery.create(fname: "flowerboxes.jpg", category: "x_country", thumbnail: "flowerboxes-thumb.jpg", caption: "Flower Boxes")
-pic = Gallery.create(fname: "xc1.jpg", category: "x_country", thumbnail: "xc1-thumb.jpg", caption: "Flower Fence")
-pic = Gallery.create(fname: "xc2.jpg", category: "x_country", thumbnail: "xc2-thumb.jpg", caption: "Fence 2")
-
-puts 'facility gallery contents'
-pic = Gallery.create(fname: "facility1.jpg", category: "facility", thumbnail: "facility1-thumb.jpg", caption: "caption1")
-pic = Gallery.create(fname: "facility2.jpg", category: "facility", thumbnail: "facility2-thumb.jpg", caption: "caption2")
-pic = Gallery.create(fname: "facility3.jpg", category: "facility", thumbnail: "facility3-thumb.jpg", caption: "caption3")
-pic = Gallery.create(fname: "facility4.jpg", category: "facility", thumbnail: "facility4-thumb.jpg", caption: "caption4")
-
+#puts 'x country gallery contents'
+#pic = Gallery.create(fname: "flowerboxes.jpg", category: "x_country", thumbnail: "flowerboxes-thumb.jpg", caption: "Flower Boxes")
+#pic = Gallery.create(fname: "xc1.jpg", category: "x_country", thumbnail: "xc1-thumb.jpg", caption: "Flower Fence")
+#pic = Gallery.create(fname: "xc2.jpg", category: "x_country", thumbnail: "xc2-thumb.jpg", caption: "Fence 2")
+#
+#puts 'facility gallery contents'
+#pic = Gallery.create(fname: "facility1.jpg", category: "facility", thumbnail: "facility1-thumb.jpg", caption: "caption1")
+#pic = Gallery.create(fname: "facility2.jpg", category: "facility", thumbnail: "facility2-thumb.jpg", caption: "caption2")
+#pic = Gallery.create(fname: "facility3.jpg", category: "facility", thumbnail: "facility3-thumb.jpg", caption: "caption3")
+#pic = Gallery.create(fname: "facility4.jpg", category: "facility", thumbnail: "facility4-thumb.jpg", caption: "caption4")
+#
 puts 'clinic documents'
 doc = Gallery.create(fname: "bh_entry_form.doc", category: "clinic_docs", thumbnail: "document.jpg", caption: "Brad Hall Entry Registration Form")
 doc = Gallery.create(fname: "hold_harmless.doc", category: "clinic_docs", thumbnail: "document.jpg", caption: "Hold Harmless Form")
@@ -49,6 +49,6 @@ doc = Gallery.create(fname: "medical_auth.doc", category: "clinic_docs", thumbna
 
 ActiveRecord::Base.connection.execute("truncate table events RESTART IDENTITY;")
 
-puts 'clinic events'
-event = Event.create(category: "clinic", name: "an event title", date_and_time: DateTime.now, description: "a description for the event...")
+#puts 'clinic events'
+#event = Event.create(category: "clinic", name: "an event title", date_and_time: DateTime.now, description: "a description for the event...")
 
