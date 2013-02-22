@@ -21,6 +21,14 @@ section {
   display: block;
 }
 
+.header-section {
+    position:fixed;
+    top:40px;
+    left: 0px;
+    height: 175px;
+    background-color: #0f3334;
+}
+
 .geneva_title {
 	position:fixed;
 	top:10px;
@@ -40,9 +48,6 @@ section {
 }
 
 .header_image {
-    position: fixed;
-    top: 0px;
-    right:150px;
     height: 150px;
 }
 
@@ -51,6 +56,19 @@ section {
     font-size: 20px;
     font-weight: bold;
     color: #1406a3;
+}
+
+.header_menu_item {
+ padding-top: 10px;
+ font-weight: bold;
+ color: white;
+}
+
+.log_button {
+    color: white !important;
+    font-weight: bold !important;
+    margin-left: 15px !important;
+    margin-right: 15px !important;
 }
 
 .centered-section {
@@ -139,14 +157,6 @@ section {
 	margin-right: auto;
 	padding-left: 30px;
 	width: 600px;
-}
-
-.main_yield {
-	margin-bottom: 30px;
-}
-
-#main_content {
-	padding-left: 20px;
 }
 
 .header_mail {
@@ -318,9 +328,9 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 21px;
-  color: #013435;
+  color: #0c1b1c;
   background-color: #aead8e;
-  padding-top: 230px;
+  padding-top: 215px;
 }
 a {
   color: #f5f3dc;
@@ -3196,10 +3206,6 @@ input[type="submit"].btn.btn-mini {
   text-decoration: none;
 }
 .navbar .brand {
-  float: left;
-  display: block;
-  padding: 8px 20px 12px;
-  margin-left: -20px;
   font-size: 40px !important;
   font-weight: 200;
   line-height: 1;
@@ -4454,10 +4460,7 @@ pre {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-.navbar .brand {
-  font-size: 26px;
-  padding: 18px 20px 12px;
-}
+
 .navbar .nav > li > a {
   font-size: 20px;
   padding: 22px 10px 11px;

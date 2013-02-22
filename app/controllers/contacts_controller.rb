@@ -28,7 +28,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(params[:contact])
 
     if @contact.save
-      redirect_to @contact, notice: 'Contact was successfully created.'
+      redirect_to root_path, notice: 'Contact was successfully created.'
     else
       render action: "new"
     end
@@ -37,7 +37,7 @@ class ContactsController < ApplicationController
   def update
     @contact = Contact.find(params[:id])
     if @contact.update_attributes(params[:contact])
-      redirect_to root_path, :notice => "Thank you for registering and your comments."
+      redirect_to contacts_path, :notice => "Thank you for registering and your comments."
     else
       redirect_to edit_contact_path, :alert => "Unable to make contact entry."
     end

@@ -1,47 +1,19 @@
-<div class="navbar" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <ul class="nav pull-left">
-        <li><%= link_to image_tag("ge_logo.jpg"), root_path %>
-        </li>
-        <li>
-          <div class='geneva_title'>
-            <%= link_to "Geneva Equestrian", root_path, :class => 'brand' %>
-            <br/>
-            <br/>
-            N3010 Hwy 67<br/>Lake Geneva, WI 53147 <%= link_to "(map)",
-                                                               "https://maps.google.com/maps?q=42.601217,-88.54017&ll=42.601296,-88.540159&spn=0.004494,0.007424&num=1&t=h&z=17" %>
-            <br/>
-            PHONE: (262) 245-6490<br/>
-            FAX: (262) 245-6319 <br/>
-            <%= link_to "Email: Geneva Equestrian", "mailto:GenevaEquestrian@msn.com", :class=>"header_mail" %>
-          </div>
-        </li>
-      </ul>
-
-
-      <div class="header_image">
-        <%= image_tag "riding/brad_puma_stadium4.jpg", :style => "height: 200px" %>
-      </div>
-
-
-      <div class="pull-right">
-
-        <ul class="nav pull-right">
-          <% if user_signed_in? %>
-              <li>
-                <%= link_to current_user.name, "#" %>&nbsp;&nbsp;
-                <%= link_to 'Logout', destroy_user_session_path, :method => 'delete' %>
-              </li>
-          <% else %>
-              <li>
-                <%= link_to 'Login', new_user_session_path %>
-              </li>
-          <% end %>
-
-
-        </ul>
-      </div>
-    </div>
+<div class="row-fluid header-section">
+  <div class="span1">&nbsp;</div>
+  <div class="span2">
+    <%= link_to image_tag("ge_logo.jpg"), root_path %>
+  </div>
+  <div class="span5">
+    <%= link_to "Geneva Equestrian", root_path, :class => 'brand' %> <br/><br/><br/><br/>
+    N3010 Hwy 67<br/>
+    Lake Geneva, WI 53147
+    <%= link_to "(map)", "https://maps.google.com/maps?q=42.601217,-88.54017&ll=42.601296,-88.540159&spn=0.004494,0.007424&num=1&t=h&z=17" %>
+    <br/>
+    PHONE: (262) 245-6490<br/>
+    FAX: (262) 245-6319 <br/>
+    <%= link_to "Email: Geneva Equestrian", "mailto:GenevaEquestrian@msn.com", :class=>"header_mail" %>
+  </div>
+  <div class="span4">
+    <%= image_tag "riding/brad_puma_stadium4.jpg", :class=>"header_image" %>
   </div>
 </div>

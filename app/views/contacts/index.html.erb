@@ -1,29 +1,21 @@
 <h1>Listing contacts</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Subject</th>
-    <th>Content</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @contacts.each do |contact| %>
-  <tr>
-    <td><%= contact.name %></td>
-    <td><%= contact.email %></td>
-    <td><%= contact.subject %></td>
-    <td><%= contact.content %></td>
-    <td><%= link_to 'Show', contact %></td>
-    <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-    <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table class="table table-striped">
+  <div class="row-fluid">
+    <% @contacts.each do |contact| %>
+        <tr>
+          <td>
+            <span class="span2"><%= contact.name %></span>
+            <span class="span2"><%= contact.email %></span><br/>
+            <span class="span10"><%= contact.subject %></span><br/>
+            <span class="span10"><%= contact.content %></span><br/>
+            <span class="span10"><%= link_to 'Show', contact, :class=>"btn btn-info" %>
+            <%= link_to 'Edit', edit_contact_path(contact), :class=>"btn btn-success" %>
+            <%= link_to 'Destroy', contact, method: :delete,
+                        data: {confirm: 'Are you sure?'}, :class=>"btn btn-danger" %></span>
+          </td>
+        </tr>
+    <% end %>
+  </div>
 </table>
 
-<br />
-
-<%= link_to 'New Contact', new_contact_path %>
