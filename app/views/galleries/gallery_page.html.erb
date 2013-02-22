@@ -40,9 +40,11 @@
         <%= "<span class='gallery-item' data-href='#{pic.image.url(:full)}' title='#{pic.caption}'>".html_safe %>
         <%= "<image src='#{pic.image.url(:full)}' class='gallery-thumbnail'></image>".html_safe %><br/>
         </span>
-          <%= link_to "Edit", edit_gallery_path(pic) %> &nbsp;&nbsp;&nbsp;
-          <%= link_to "Delete", gallery_path(pic), method: :delete,
-                            data: { confirm: 'Are you sure?' }%>
+          <% if !current_user.nil? && current_user.has_role?(:admin) %>
+              <%= link_to "Edit", edit_gallery_path(pic) %> &nbsp;&nbsp;&nbsp;
+              <%= link_to "Delete", gallery_path(pic), method: :delete,
+                                data: { confirm: 'Are you sure?' }%>
+          <% end %>
         </div>
 
         <% (1..4).each do |n| %>
@@ -52,9 +54,11 @@
                 <%= "<span class='gallery-item' data-href='#{pic.image.url(:full)}' title='#{pic.caption}'>".html_safe %>
                 <%= "<image src='#{pic.image.url(:full)}' class='gallery-thumbnail'></image>".html_safe %><br/>
                 </span>
-                  <%= link_to "Edit", edit_gallery_path(pic) %>&nbsp;&nbsp;&nbsp;
-                  <%= link_to "Delete", gallery_path(pic), method: :delete,
-                              data: { confirm: 'Are you sure?' }%>
+                  <% if !current_user.nil? && current_user.has_role?(:admin) %>
+                      <%= link_to "Edit", edit_gallery_path(pic) %>&nbsp;&nbsp;&nbsp;
+                      <%= link_to "Delete", gallery_path(pic), method: :delete,
+                                  data: { confirm: 'Are you sure?' }%>
+                  <% end %>
                 </div>
             <% end %>
         <% end %>
