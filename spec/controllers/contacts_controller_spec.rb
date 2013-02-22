@@ -95,7 +95,7 @@ describe ContactsController do
 
         it "redirects to the created contact" do
           post :create, {:contact => valid_attributes}
-          response.should redirect_to(Contact.last)
+          response.should redirect_to(root_path)
         end
       end
 
@@ -138,7 +138,7 @@ describe ContactsController do
           i = Contact.all.length
           contact = Contact.create! valid_attributes
           put :update, {:id => contact.to_param, :contact => valid_attributes}
-          response.should redirect_to(root_path)
+          response.should redirect_to(contacts_path)
           Contact.all.length.should == i + 1
         end
       end
