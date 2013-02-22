@@ -47,9 +47,9 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
 
     if @event.save
-      redirect_to "#{events_path}?id=#{params[:event][:category]}", notice: 'Event was successfully created.'
+      redirect_to events_path(:event_type => @event.category), notice: 'Event was successfully created.'
     else
-      render action: "new?id=clinic", :alert=>"Error creating event..."
+      render action: "new?event_type=#{@event.category}", :alert=>"Error creating event..."
     end
   end
 
@@ -63,7 +63,7 @@ class EventsController < ApplicationController
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit", alert: 'Error updating event.' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -73,11 +73,10 @@ class EventsController < ApplicationController
   # DELETE /events/1.json
   def destroy
     @event = Event.find(params[:id])
-    @event.destroy
-
-    respond_to do |format|
-      format.html { redirect_to events_url }
-      format.json { head :no_content }
-    end
+    if @event.destroy
+      redirect_to events_url(:event_type=>@event.category), :notice=>"Successfully deleted event."
+      else
+        redirect_to events_url(:event_type=>@event.category), :alert=>"Error deleting event."
+      end
   end
 end

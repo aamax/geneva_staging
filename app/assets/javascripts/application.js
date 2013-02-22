@@ -16,3 +16,9 @@
 //= require_tree .
 //= require bootstrap/load-image.min
 //= require bootstrap/image-gallery.min
+
+$(document).ready(function(){
+    setTimeout(function() {
+        $('div.alert').fadeOut(2000);
+    }, 2500); // <-- time in milliseconds
+});

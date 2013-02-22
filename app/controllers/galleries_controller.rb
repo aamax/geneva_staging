@@ -47,11 +47,6 @@ class GalleriesController < ApplicationController
   # GET /galleries/1.json
   def show
     @gallery = Gallery.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @gallery }
-    end
   end
 
   # GET /galleries/new
@@ -77,11 +72,9 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.save
-        format.html { redirect_to @gallery, notice: 'Gallery was successfully created.' }
-        format.json { render json: @gallery, status: :created, location: @gallery }
+        redirect_to @gallery, notice: 'Gallery was successfully created.'
       else
-        format.html { render action: "new" }
-        format.json { render json: @gallery.errors, status: :unprocessable_entity }
+        render action: "new?page=#{@gallery.category}", alert: 'Error creating gallery entry.'
       end
     end
   end
@@ -108,9 +101,6 @@ class GalleriesController < ApplicationController
     @gallery = Gallery.find(params[:id])
     @gallery.destroy
 
-    respond_to do |format|
-      format.html { redirect_to galleries_url }
-      format.json { head :no_content }
-    end
+    redirect_to galleries_url(:page=>@gallery.category)
   end
 end

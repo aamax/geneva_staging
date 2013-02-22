@@ -44,7 +44,7 @@ describe GalleriesController do
       it "assigns all galleries as @galleries" do
         gallery = Gallery.create! valid_attributes
         get :index, {}
-        assigns(:galleries).should eq([])
+        assigns(:galleries).should eq([gallery])
       end
     end
 

@@ -18,19 +18,19 @@
 
   <p><a data-toggle="modal" href="/x_country" class="btn btn-primary btn-large menu_button">Cross Country</a></p>
 
-  <p><%= link_to "Calendar", "#{events_path}?event_type=calendar", id: "calendar",
+  <p><%= link_to "Calendar", "/calendar", id: "calendar",
               :class=>"btn btn-primary btn-large menu_button",
               :data => {:toggle=>"modal"} %></p>
 
-  <p><%= link_to "Clinics", "#{events_path}?event_type=clinic", id: "calendar",
+  <p><%= link_to "Clinics", "/clinics", id: "calendar",
                  :class=>"btn btn-primary btn-large menu_button",
                  :data => {:toggle=>"modal"} %></p>
 
-  <p><%= link_to "GE Schooling Shows", "#{events_path}?event_type=schooling", id: "calendar",
+  <p><%= link_to "GE Schooling Shows", "/schooling", id: "calendar",
                  :class=>"btn btn-primary btn-large menu_button",
                  :data => {:toggle=>"modal"} %></p>
 
-  <p><%= link_to "Outside Events", "#{events_path}?event_type=outside", id: "calendar",
+  <p><%= link_to "Outside Events", "/outside", id: "calendar",
                  :class=>"btn btn-primary btn-large menu_button",
                  :data => {:toggle=>"modal"} %></p>
 

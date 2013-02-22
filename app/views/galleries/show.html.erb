@@ -1,12 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <%= link_to 'Edit', edit_gallery_path(@gallery) %> |
-<%= link_to 'Back', galleries_path %>
+<%= link_to 'Gallery List', galleries_path(:page => @gallery.category) %>
 
 <br/><br/>
-
-<strong>Category: </strong> <%= @gallery.category %><br/><br/>
-<strong>File Name: </strong> <%= @gallery.fname %><br/><br/>
-<strong>Thumb Nail: </strong> <%= @gallery.thumbnail %><br/><br/>
-<strong>Caption: </strong> <%= @gallery.caption %><br/><br/>
-<%= image_tag @gallery.image.url(:full) %>
+<div class="row-fluid">
+  <div class="span3">
+    <strong>Category: </strong> <%= @gallery.category %><br/><br/>
+    <strong>Caption: </strong> <%= @gallery.caption %><br/><br/>
+  </div>
+  <div class="span7">
+    <%= image_tag @gallery.image.url(:full) %>
+  </div>
+</div>

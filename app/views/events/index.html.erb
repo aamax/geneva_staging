@@ -1,7 +1,7 @@
 <div class="row-fluid span10">
   <h2>Upcoming <%= @event_title %> Events</h2>
   <% if !current_user.nil? && current_user.has_role?(:admin) %>
-    <%= link_to 'New Event', "#{new_event_path}?id=#{@event_type}" %>
+    <%= link_to 'New Event', new_event_path(:event_type => @event_type) %>
   <% end %>
 </div>
 
@@ -26,7 +26,7 @@
             <td><%= e.date_and_time.strftime("%Y-%m-%d %H:%M") %></td>
           </span>
 
-          <% if (current_user.nil? && current_user.has_role?( :admin)) %>
+          <% if (!current_user.nil? && current_user.has_role?( :admin)) %>
               <span class='span2'>
                <td><%= e.description.html_safe %></td>
               </span>
@@ -40,7 +40,7 @@
               <td class="span1"><%= link_to 'View', event_path(e), :class=>"btn btn-action" %></td>
               <td class="span1"><%= link_to 'Edit', "#{edit_event_path(e)}?event_type=#{e.category}",
                                             :class=>"btn btn-success" %></td>
-              <td class="span1"><%= link_to 'Destroy', event_path(e), method: :delete,
+              <td class="span1"><%= link_to 'Delete', event_path(e), method: :delete,
                                             data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %></td>
           <% end %>
         </tr>

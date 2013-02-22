@@ -28,7 +28,7 @@ describe EventsController do
       it "assigns all events as @events" do
         event = Event.create! valid_attributes
         get :index, {}
-        assigns(:events).should eq([])
+        assigns(:events).should eq([event])
       end
     end
 
@@ -175,7 +175,8 @@ describe EventsController do
 
       it "redirects to the created event" do
         post :create, {:event => valid_attributes}
-        response.should redirect_to(Event.last)
+
+        response.should redirect_to("#{events_path}?event_type=#{valid_attributes[:category]}")
       end
     end
   end
