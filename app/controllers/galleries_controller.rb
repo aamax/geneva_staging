@@ -53,11 +53,7 @@ class GalleriesController < ApplicationController
   # GET /galleries/new.json
   def new
     @gallery = Gallery.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @gallery }
-    end
+    @gallery.category = params[:page]
   end
 
   # GET /galleries/1/edit
@@ -70,12 +66,10 @@ class GalleriesController < ApplicationController
   def create
     @gallery = Gallery.new(params[:gallery])
 
-    respond_to do |format|
-      if @gallery.save
-        redirect_to @gallery, notice: 'Gallery was successfully created.'
-      else
-        render action: "new?page=#{@gallery.category}", alert: 'Error creating gallery entry.'
-      end
+    if @gallery.save
+      redirect_to @gallery, notice: 'Gallery was successfully created.'
+    else
+      render action: "new?page=#{@gallery.category}", alert: 'Error creating gallery entry.'
     end
   end
 
@@ -83,15 +77,10 @@ class GalleriesController < ApplicationController
   # PUT /galleries/1.json
   def update
     @gallery = Gallery.find(params[:id])
-
-    respond_to do |format|
-      if @gallery.update_attributes(params[:gallery])
-        format.html { redirect_to @gallery, notice: 'Gallery was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @gallery.errors, status: :unprocessable_entity }
-      end
+    if @gallery.update_attributes(params[:gallery])
+      redirect_to @gallery, notice: 'Gallery was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -101,6 +90,6 @@ class GalleriesController < ApplicationController
     @gallery = Gallery.find(params[:id])
     @gallery.destroy
 
-    redirect_to galleries_url(:page=>@gallery.category)
+    redirect_to galleries_url(:page => @gallery.category)
   end
 end

@@ -2,5 +2,8 @@
 
 FactoryGirl.define do
   factory :event do
+    date_and_time DateTime.now
+    name "event name"
+    description "event description"
   end
 end

@@ -2,7 +2,7 @@
     <div class="row_fluid">
       <div class="pull-left">
         <div class="span3">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Contact Manager", contacts_path, :class=>"btn btn-success log_button" %>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Contact Manager", contacts_path, :class=>"btn btn-mini btn-success log_button" %>
         </div>
       </div>
       <div class="pull-right">
@@ -11,7 +11,7 @@
         </div>
         <div class="span1">
           <%= link_to '&nbsp;&nbsp;&nbsp;Logout&nbsp;&nbsp;&nbsp;'.html_safe, destroy_user_session_path,
-                      :method => 'delete', :class=>"btn btn-success log_button" %>
+                      :method => 'delete', :class=>"btn btn-mini btn-success log_button" %>
         </div>
         <div class="span1">
           &nbsp;
@@ -23,7 +23,7 @@
     <div class="row_fluid">
       <div class="pull-right">
         <div class="span1">
-          <%= link_to 'Login', new_user_session_path, :class=>"log_button btn btn-success" %>
+          <%= link_to 'Login', new_user_session_path, :class=>"log_button btn btn-mini btn-success" %>
         </div>
         <div class="span1">
           &nbsp;

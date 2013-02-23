@@ -43,9 +43,26 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation
   end
   config.before(:each) do
-    DatabaseCleaner.start
+    #DatabaseCleaner.start
   end
   config.after(:each) do
     DatabaseCleaner.clean
   end
+end
+
+def browser_auth(role)
+  @users ||= {}
+  @users[role] = create_user(role) if @users[role].nil?
+
+  visit "/users/sign_in"
+  fill_in('user_email', with: @users[role].email)
+  fill_in('user_password', with: 'password')
+  click_button('Sign in')
+  @users[role]
+end
+
+def create_user(role)
+  user = FactoryGirl.create(:user, name: "#{role.to_s}.capitalize User")
+  user.add_role role
+  user
 end

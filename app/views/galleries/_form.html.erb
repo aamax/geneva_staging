@@ -7,7 +7,7 @@
           <%= f.select :category, options_for_select(["facility", "x_country"], @gallery.category ) %>
 
           <%= f.input :caption %>
-          <%= f.file_field :image %>
+          <%= f.file_field :image, :class=>"file_upload_btn" %>
         </div>
         <div class="form-actions">
           <%= f.button :submit %>
@@ -17,7 +17,7 @@
   <div class="span6">
 
     <% unless @gallery.image.blank? %>
-        <%= image_tag @gallery.image.url(:full) %>
+        <%= image_tag @gallery.image.url(:full), :id=>"gallery_image" %>
     <% end %>
 
   </div>

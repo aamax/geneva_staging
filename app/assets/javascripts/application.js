@@ -21,4 +21,7 @@ $(document).ready(function(){
     setTimeout(function() {
         $('div.alert').fadeOut(2000);
     }, 2500); // <-- time in milliseconds
+
+    // refresh image when file is uploaded
+
 });
