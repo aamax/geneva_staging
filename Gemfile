@@ -19,6 +19,7 @@ gem "activeadmin"
 gem 'bootstrap-addons-rails'
 
 gem "paperclip", "~> 3.0"
+gem 'aws-sdk'
 
 group :development do
   gem "quiet_assets", ">= 1.0.1"
