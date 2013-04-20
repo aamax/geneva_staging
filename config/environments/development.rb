@@ -31,6 +31,17 @@ GenevaEquestrian::Application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
 
+  config.paperclip_defaults = {
+      :storage => :s3,
+      :s3_credentials => {
+          :bucket => 'genevaeq',
+          :bucket_name => 'genevaeq',
+          :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+          :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+      }
+  }
+
+
   Paperclip.options[:command_path] = "/usr/local/bin/"
 
   # Print deprecation notices to the Rails logger

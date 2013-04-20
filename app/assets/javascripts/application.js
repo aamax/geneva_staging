@@ -13,9 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree .
+//= require bootstrap/colorpicker
+//= require bootstrap/datepicker
+
 //= require bootstrap/load-image.min
 //= require bootstrap/image-gallery.min
+//= require_tree .
+
 
 $(document).ready(function(){
     setTimeout(function() {
