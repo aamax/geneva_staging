@@ -7,7 +7,7 @@ GenevaEquestrian::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  #devise_for :users, ActiveAdmin::Devise.config
+  devise_for :users, ActiveAdmin::Devise.config
 
   match "/construction", :to => "home#construction"
   match "/home", :to => "home#home"
