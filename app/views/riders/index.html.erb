@@ -1,0 +1,27 @@
+<h1>Riders List</h1>  <br/>
+
+<hr/>
+
+<table class="table table-striped">
+  <tr>
+    <th>event_id</th>
+    <th>Rider</th>
+    <th>Horse</th>
+    <th>Dressage Time</th>
+    <th>X-Country Time</th>
+    <th>Status</th>
+  </tr>
+
+  <% @riders.each do |r| %>
+      <tr>
+        <td><%= r.event.name %></td>
+        <td><%= r.name %></td>
+        <td><%= r.horse %></td>
+        <td><%= r.dressage %></td>
+        <td><%= r.xcountry %></td>
+        <td><%= r.status %></td>
+      </tr>
+  <% end %>
+</table>
+
+

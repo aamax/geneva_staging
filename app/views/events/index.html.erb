@@ -20,7 +20,13 @@
     <% @events.each do |e| %>
         <tr>
           <span class="span1">
-           <td><%= e.name %></td>
+           <td>
+             <% if e.category == 'outside' %>
+                <%= e.name %>
+             <% else %>
+                 <%= link_to e.name, "riders_for_event/#{e.id}", :class=>"rider_link btn btn-small btn-default" %>
+             <% end %>
+           </td>
           </span>
           <span class="span2">
             <td><%= e.date_and_time.strftime("%Y-%m-%d %H:%M") %></td>

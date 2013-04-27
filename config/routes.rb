@@ -1,9 +1,8 @@
 GenevaEquestrian::Application.routes.draw do
   resources :contacts
-
-
   resources :events
   resources :galleries
+  resources :riders
 
   ActiveAdmin.routes(self)
 
@@ -17,6 +16,8 @@ GenevaEquestrian::Application.routes.draw do
   match "/schooling", :to => "events#index", :event_type=>"schooling"
   match "/outside", :to => "events#index", :event_type=>"outside"
   match "/calendar", :to => "events#index", :event_type=>"all"
+
+  match "/riders_for_event/:id", :to => "riders#show"
 
   root :to => "home#home"
 

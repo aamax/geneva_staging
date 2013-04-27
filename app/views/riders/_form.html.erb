@@ -1,0 +1,40 @@
+<div class="row-fluid">
+  <div class="span4">
+    <%= simple_form_for(@rider) do |f| %>
+        <%= f.error_notification %>
+
+        <%= f.input :event_id, :as => :hidden, :input_html => { :value => @event.id } %>
+        <div class="form-inputs">
+          <table class="table">
+            <tr>
+              <td>
+                <%= f.input :name, :placeholder => "Name" %>
+              </td>
+              <td>
+                <%= f.input :horse, :placeholder => "Horse" %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label class="string control-label">Dressage Start Time:</label>
+                <%= f.text_field :dressage, :placeholder => "Dressage Start Time" %>
+              </td>
+              <td>
+                <label class="string control-label">X-Country Start Time:</label>
+                <%= f.text_field :xcountry, :placeholder => "XCountry Start Time" %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <%= f.text_area :status, :placeholder => "Status", :class=>"rider_status", :rows=>3, :cols=>50 %>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit %>
+        </div>
+    <% end %>
+  </div>
+</div>

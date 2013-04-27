@@ -17,4 +17,6 @@ class Event < ActiveRecord::Base
   scope "clinics", where("category = 'clinic'").order(:date_and_time)
   scope "schooling", where("category = 'schooling'").order(:date_and_time)
   scope "outside", where("category = 'outside'").order(:date_and_time)
+
+  has_many :riders
 end

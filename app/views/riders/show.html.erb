@@ -1,0 +1,36 @@
+<h1>Riders List For: <%= @event.name %></h1>  <br/>
+<% if !current_user.nil? && (current_user.has_role :admin) %>
+    <%= link_to "Add Rider", new_rider_path(:event_id=>@event.id), :class=>"btn btn-small btn-success" %>
+<% end %>
+<hr/>
+
+<table class="table table-striped">
+  <tr>
+    <th>Rider</th>
+    <th>Horse</th>
+    <th>Dressage Time</th>
+    <th>X-Country Time</th>
+    <th>Status</th>
+    <% if !current_user.nil? && (current_user.has_role :admin) %>
+        <th>Manage</th>
+    <% end %>
+  </tr>
+
+  <% @riders.each do |r| %>
+    <tr>
+      <td><%= r.name %></td>
+      <td><%= r.horse %></td>
+      <td><%= r.dressage %></td>
+      <td><%= r.xcountry %></td>
+      <td><%= r.status %></td>
+      <% if !current_user.nil? && (current_user.has_role :admin) %>
+          <td>
+            <%= link_to "<i class='icon-wrench icon-white'></i>".html_safe, edit_rider_url(r.id) %> &nbsp;&nbsp;
+            <%= link_to  "<i class='icon-trash icon-white'></i>".html_safe, rider_url(r.id),
+                         :confirm=>"are you sure?", :method=>:delete %>
+          </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
