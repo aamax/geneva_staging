@@ -11,17 +11,20 @@ class RidersController < ApplicationController
   end
 
   def edit
+    authorize! :update, @rider, :message => 'Not authorized as an administrator.'
     @rider = Rider.find(params[:id])
     @event = Event.find(@rider.event_id)
   end
 
   def new
+    authorize! :create, @rider, :message => 'Not authorized as an administrator.'
     @event = Event.find(params[:event_id])
     @rider = Rider.new
     @rider.event_id = @event.id
   end
 
   def create
+    authorize! :create, @rider, :message => 'Not authorized as an administrator.'
     @rider = Rider.new(params[:rider])
     if @rider.save
       params[:id] = @rider.event_id
@@ -47,6 +50,7 @@ class RidersController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, @rider, :message => 'Not authorized as an administrator.'
     @rider = Rider.find(params[:id])
     @event = Event.find(@rider.event_id)
     @riders = Rider.find_all_by_event_id(@rider.event_id)
