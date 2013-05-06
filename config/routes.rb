@@ -2,7 +2,9 @@ GenevaEquestrian::Application.routes.draw do
   resources :contacts
   resources :events
   resources :galleries
-  resources :riders
+  resources :riders do
+    collection {post :import }
+  end
 
   ActiveAdmin.routes(self)
 

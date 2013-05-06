@@ -60,4 +60,14 @@ class RidersController < ApplicationController
       redirect_to "/riders_for_event/#{@event.id}", :alert => "ERROR Rider not Deleted."
     end
   end
+
+  def import
+    if (Rider.import(params[:file], params[:event_id]) == true)
+      redirect_to "/riders_for_event/#{params[:event_id]}", :notice => "riders imported."
+    else
+      redirect_to "/riders_for_event/#{params[:event_id]}", :alert => "Error importing riders."
+    end
+
+
+  end
 end

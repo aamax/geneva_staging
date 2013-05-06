@@ -17,4 +17,13 @@ class Rider < ActiveRecord::Base
   attr_accessible :dressage, :event_id, :horse, :name, :status, :xcountry
 
   belongs_to :event
+
+  def self.import(file, event_id)
+    CSV.foreach(file.path, headers: true) do |row|
+      rec = row.to_hash
+      rec[:event_id] = event_id
+      Rider.create! rec
+    end
+    true
+  end
 end

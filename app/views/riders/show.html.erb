@@ -34,3 +34,19 @@
   <% end %>
 </table>
 
+<% if !current_user.nil? && (current_user.has_role :admin) %>
+
+<h2>Import Riders To This Event</h2>
+   <div class="well">
+    Import file must have the correct format: <br/>
+    First line is a header line with the column names.<br/>
+    All columns must be present: name, horse, status, dressage, xcountry<br/><br/>
+   </div>
+
+    <%= form_tag import_riders_path, multipart: true do  %>
+    <%= hidden_field_tag "event_id", @event.id %>
+    <%= file_field_tag  :file %><br/><br/>
+    <%= submit_tag :submit %>
+<% end %>
+
+<% end %>
