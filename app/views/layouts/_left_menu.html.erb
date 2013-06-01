@@ -1,45 +1,45 @@
 <div id="nav_menu">
-  <p><a data-toggle="modal" href="/" class="btn  btn-primary btn-large menu_button">Home</a></p>
+  <p><a data-toggle="modal" href="/" class="btn btn-custom btn-large menu_button">Home</a></p>
 
 
   <% if user_signed_in? %>
       <% if current_user.has_role? :admin %>
-          <p><a data-toggle="modal" href="/admin" class="btn  btn-primary btn-large menu_button">Admin</a></p>
+          <p><a data-toggle="modal" href="/admin" class="btn btn-custom btn-large menu_button">Admin</a></p>
       <% end %>
   <% end %>
 
-  <p><a data-toggle="modal" href="/about" class="btn  btn-primary btn-large menu_button">About Us</a></p>
+  <p><a data-toggle="modal" href="/about" class="btn btn-custom btn-large menu_button">About Us</a></p>
 
-  <p><a data-toggle="modal" href="/boarding" class="btn btn-primary btn-large menu_button">Boarding</a></p>
+  <p><a data-toggle="modal" href="/boarding" class="btn btn-custom btn-large menu_button">Boarding</a></p>
 
-  <p><a data-toggle="modal" href="/training" class="btn btn-primary btn-large menu_button">Training</a></p>
+  <p><a data-toggle="modal" href="/training" class="btn btn-custom btn-large menu_button">Training</a></p>
 
-  <p><a data-toggle="modal" href="/facility" class="btn btn-primary btn-large menu_button">Facility</a></p>
+  <p><a data-toggle="modal" href="/facility" class="btn btn-custom btn-large menu_button">Facility</a></p>
 
-  <p><a data-toggle="modal" href="/x_country" class="btn btn-primary btn-large menu_button">Cross Country</a></p>
+  <p><a data-toggle="modal" href="/x_country" class="btn btn-custom btn-large menu_button">Cross Country</a></p>
 
   <p><%= link_to "Calendar", "/calendar", id: "calendar",
-              :class=>"btn btn-primary btn-large menu_button",
+              :class=>"btn btn-custom btn-large menu_button",
               :data => {:toggle=>"modal"} %></p>
 
   <p><%= link_to "Clinics", "/clinics", id: "calendar",
-                 :class=>"btn btn-primary btn-large menu_button",
+                 :class=>"btn btn-custom btn-large menu_button",
                  :data => {:toggle=>"modal"} %></p>
 
   <p><%= link_to "GE Schooling Shows", "/schooling", id: "calendar",
-                 :class=>"btn btn-primary btn-large menu_button",
+                 :class=>"btn btn-custom btn-large menu_button",
                  :data => {:toggle=>"modal"} %></p>
 
   <p><%= link_to "Outside Events", "/outside", id: "calendar",
-                 :class=>"btn btn-primary btn-large menu_button",
+                 :class=>"btn btn-custom btn-large menu_button",
                  :data => {:toggle=>"modal"} %></p>
 
-  <p><a data-toggle="modal" href="/construction" class="btn btn-primary btn-large menu_button">Sales</a></p>
+  <p><a data-toggle="modal" href="/construction" class="btn btn-custom btn-large menu_button">Sales</a></p>
 
-  <p><a data-toggle="modal" href="/contacts/new" class="btn btn-primary btn-large menu_button">Contact List</a></p>
+  <p><a data-toggle="modal" href="/contacts/new" class="btn btn-custom btn-large menu_button">Contact List</a></p>
 
-  <p><a data-toggle="modal" href="/links" class="btn btn-primary btn-large menu_button">Links</a></p>
+  <p><a data-toggle="modal" href="/links" class="btn btn-custom btn-large menu_button">Links</a></p>
 
-  <p><a data-toggle="modal" href="/downloads" class="btn btn-primary btn-large menu_button">Downloads</a></p>
+  <p><a data-toggle="modal" href="/downloads" class="btn btn-custom btn-large menu_button">Downloads</a></p>
 
 </div>

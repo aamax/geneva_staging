@@ -1,10 +1,14 @@
 <div class="row-fluid header-section">
   <div class="span1">&nbsp;</div>
   <div class="span2">
-    <%= link_to image_tag("ge_logo.jpg"), root_path %>
+    <div class="img_outer">
+      <%= link_to image_tag("ge_logo.jpg"), root_path, :class=>"ge_logo" %>
+    </div>
+
   </div>
   <div class="span5">
     <%= link_to "Geneva Equestrian", root_path, :class => 'brand' %> <br/><br/><br/><br/>
+    <div class="line_height_set">
     N3010 Hwy 67<br/>
     Lake Geneva, WI 53147
     <%= link_to "(map)", "https://maps.google.com/maps?q=42.601217,-88.54017&ll=42.601296,-88.540159&spn=0.004494,0.007424&num=1&t=h&z=17" %>
@@ -12,8 +16,11 @@
     PHONE: (262) 245-6490<br/>
     FAX: (262) 245-6319 <br/>
     <%= link_to "Email: Geneva Equestrian", "mailto:GenevaEquestrian@msn.com", :class=>"header_mail" %>
+    </div>
   </div>
   <div class="span4">
-    <%= image_tag "riding/brad_puma_stadium4.jpg", :class=>"header_image" %>
+    <div class="img_outer">
+    <%= image_tag "riding/brad_puma_stadium4.jpg", :class=>"header_image ge_logo" %>
+      </div>
   </div>
 </div>
