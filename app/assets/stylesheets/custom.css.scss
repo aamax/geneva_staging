@@ -9,6 +9,9 @@
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
 
+.geneva_address {
+ }
+
 .img_outer {
   width: 150px;
   height: 150px;
@@ -23,7 +26,9 @@
   overflow: hidden;
   padding: 10px;
   position: relative;
-  top: -20px;
+  top: 0px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .ge_logo {
@@ -264,6 +269,7 @@ html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  min-width: 1000px;
 }
 a:focus {
   outline: thin dotted #333;

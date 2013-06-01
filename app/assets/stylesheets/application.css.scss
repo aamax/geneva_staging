@@ -28,6 +28,9 @@
 #main_content {
   padding-left: 20px;
   padding-right: 20px;
+  overflow-x: scroll;
+  overflow-y: hide;
+  min-width: 800px;
 }
 
 
