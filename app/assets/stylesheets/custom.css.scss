@@ -123,6 +123,7 @@ section {
 .content {
     padding-bottom: 35px;
    background-color: #f6fcfe;
+  min-width: 800px;
 }
 
 .gallery-thumbnail {
@@ -269,7 +270,6 @@ html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  min-width: 1000px;
 }
 a:focus {
   outline: thin dotted #333;
