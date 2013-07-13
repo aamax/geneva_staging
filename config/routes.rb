@@ -1,4 +1,6 @@
 GenevaEquestrian::Application.routes.draw do
+  root :to => "home#home"
+
   resources :contacts
   resources :events
   resources :galleries
@@ -21,7 +23,6 @@ GenevaEquestrian::Application.routes.draw do
 
   match "/riders_for_event/:id", :to => "riders#show"
 
-  root :to => "home#home"
 
   devise_for :users
   resources :users
