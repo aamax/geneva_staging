@@ -8,7 +8,7 @@
   <%= @page_header.html_safe %>  <br/><br/>
 
   <% if (!current_user.nil? && current_user.has_role?(:admin)) %>
-    <%= link_to "Upload New Image", new_gallery_path(:page=>params[:page]), :class=>"btn btn-info" %>
+      <%= link_to "Upload New Image", new_gallery_path(:page => params[:page]), :class => "btn btn-info" %>
   <% end %>
 
 </div>
@@ -36,32 +36,39 @@
   <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery" data-selector="span.gallery-item">
     <% (0...@pics.count).step(5) do |p| %>
         <% pic = @pics[p] %>
-        <div class="span2">
-        <%= "<span class='gallery-item' data-href='#{pic.image.url(:full)}' title='#{pic.caption}'>".html_safe %>
-        <%= "<image src='#{pic.image.url(:full)}' class='gallery-thumbnail'></image>".html_safe %><br/>
-        </span>
-          <% if !current_user.nil? && current_user.has_role?(:admin) %>
-              <%= link_to "Edit", edit_gallery_path(pic) %> &nbsp;&nbsp;&nbsp;
-              <%= link_to "Delete", gallery_path(pic), method: :delete,
-                                data: { confirm: 'Are you sure?' }%>
+        <div class='row'>
+          <div class="span2">
+            <%= "<span class='gallery-item' data-href='#{pic.image.url(:full)}' title='#{pic.caption}'>".html_safe %>
+            <%= "<image src='#{pic.image.url(:full)}' class='gallery-thumbnail'></image>".html_safe %>
+            <br/>
+            </span>
+            <% if !current_user.nil? && current_user.has_role?(:admin) %>
+                <%= link_to "Edit", edit_gallery_path(pic) %> &nbsp;&nbsp;&nbsp;
+                <%= link_to "Delete", gallery_path(pic), method: :delete,
+                            data: {confirm: 'Are you sure?'} %>
+            <% end %>
+          </div>
+
+          <% (1..4).each do |n| %>
+              <% unless @pics[p + n].nil? %>
+                  <% pic = @pics[p + n] %>
+                  <div class="span2">
+                    <%= "<span class='gallery-item' data-href='#{pic.image.url(:full)}' title='#{pic.caption}'>".html_safe %>
+                    <%= "<image src='#{pic.image.url(:full)}' class='gallery-thumbnail'></image>".html_safe %>
+                    <br/>
+                    </span>
+                    <% if !current_user.nil? && current_user.has_role?(:admin) %>
+                        <%= link_to "Edit", edit_gallery_path(pic) %>&nbsp;&nbsp;&nbsp;
+                        <%= link_to "Delete", gallery_path(pic), method: :delete,
+                                    data: {confirm: 'Are you sure?'} %>
+                    <% end %>
+                  </div>
+              <% end %>
           <% end %>
         </div>
+        <hr/>
 
-        <% (1..4).each do |n| %>
-            <% unless @pics[p + n].nil? %>
-                <% pic = @pics[p + n] %>
-                <div class="span2">
-                <%= "<span class='gallery-item' data-href='#{pic.image.url(:full)}' title='#{pic.caption}'>".html_safe %>
-                <%= "<image src='#{pic.image.url(:full)}' class='gallery-thumbnail'></image>".html_safe %><br/>
-                </span>
-                  <% if !current_user.nil? && current_user.has_role?(:admin) %>
-                      <%= link_to "Edit", edit_gallery_path(pic) %>&nbsp;&nbsp;&nbsp;
-                      <%= link_to "Delete", gallery_path(pic), method: :delete,
-                                  data: { confirm: 'Are you sure?' }%>
-                  <% end %>
-                </div>
-            <% end %>
-        <% end %>
     <% end %>
+
   </div>
 </div>
