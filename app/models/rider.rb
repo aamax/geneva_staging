@@ -21,8 +21,13 @@ class Rider < ActiveRecord::Base
   def self.import(file, event_id)
     CSV.foreach(file.path, headers: true) do |row|
       rec = row.to_hash
-      rec[:event_id] = event_id
-      Rider.create! rec
+      
+      if rec['name'].nil? || rec['name'].empty? || rec['horse'].nil? || rec['horse'].empty?
+        next
+      end
+      r = {name: rec['name'], horse: rec['horse'], status: rec['status'], 
+              dressage: rec['dressage'], xcountry: rec['xcountry'], event_id: event_id}
+      Rider.create! r
     end
     true
   end

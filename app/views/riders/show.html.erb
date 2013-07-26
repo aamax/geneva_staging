@@ -45,7 +45,7 @@
 
     <%= form_tag import_riders_path, multipart: true do  %>
     <%= hidden_field_tag "event_id", @event.id %>
-    <%= file_field_tag  :file %><br/><br/>
+    <%= file_field_tag  :file, :style => 'color: black;' %><br/><br/>
     <%= submit_tag :submit %>
 <% end %>
 
